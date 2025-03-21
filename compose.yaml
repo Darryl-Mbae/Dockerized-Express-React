@@ -1,0 +1,67 @@
+services:
+  # Frontend Service (Vite)
+  web:
+    depends_on:
+      - backend   
+    build: ./Frontend      # Build the frontend from the 'frontend' folder
+    ports:
+      - "5173:5173"         # Expose port 5173 for the frontend app
+    environment:
+      VITE_BACKEND_URL: 'http://localhost:5500'  # Use the service name instead of localhost
+    
+    develop:
+      watch:
+        - path: ./Frontend/package.json
+          action: rebuild
+        - path: ./Frontend/package-lock.json
+          action: rebuild
+        - path: ./Frontend
+          target: /app
+          action: sync
+
+  # Backend Service (Node.js app)
+  backend:
+    build: ./Backend        # Build the backend from the 'backend' folder
+    ports:
+      - "5500:5500"         # Expose port 5500 for the backend API
+    environment:
+      DATABASE_URL: postgresql://admin:admindarletz@db:5432/darletz?schema=public
+      REDIS_URL: redis://redis:6379
+
+    depends_on:
+      - db                    # Ensure the database is ready before backend
+      - redis                 # Ensure Redis is ready before backend
+
+    develop:
+      watch:
+        - path: ./Backend/package.json
+          action: rebuild
+        - path: ./Backend/package-lock.json
+          action: rebuild
+        - path: ./Backend
+          target: /app
+          action: sync
+
+  # PostgreSQL Service
+  db:
+    image: postgres:alpine  # Use the official PostgreSQL image
+    environment:
+      POSTGRES_USER: admin    # Set PostgreSQL username
+      POSTGRES_PASSWORD: admindarletz  # Set PostgreSQL password
+      POSTGRES_DB: darletz   # Set PostgreSQL database name
+    volumes:
+      - darletz:/var/lib/postgresql/data  # Persist PostgreSQL data
+    ports:
+      - "5432:5432"          # Expose PostgreSQL port
+
+  # Redis Service
+  redis:
+    image: redis:alpine     # Use the official Redis image
+    ports:
+      - "6379:6379"          # Expose Redis port
+
+
+# Volumes (for persistent storage)
+volumes:
+  darletz:
+
