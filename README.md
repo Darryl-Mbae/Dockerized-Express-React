@@ -117,18 +117,14 @@ cd server
 npm run dev
 ```
 
-## Deployment Guide
-For production, build and run the containers with:
-```sh
-Your assignment 
-```
+
 
 ## Security & Best Practices
-✅ **Helmet.js** is enabled for additional security headers.
-✅ **Redis caching** is used to improve performance.
-✅ **Environment variables** are used for secure configuration.
-✅ **ESLint** ensures clean and consistent code.
-✅ **Dockerized setup** ensures easy deployment and scalability.
+- ✅ **Helmet.js** is enabled for additional security headers.
+- ✅ **Redis caching** is used to improve performance.
+- ✅ **Environment variables** are used for secure configuration.
+- ✅ **ESLint** ensures clean and consistent code.
+- ✅ **Dockerized setup** ensures easy deployment and scalability.
 
 ---
 
