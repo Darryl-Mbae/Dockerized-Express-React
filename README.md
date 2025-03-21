@@ -53,15 +53,13 @@ Follow these steps to set up and run the project on your local machine.
 
 ### 1. Clone the Repository
 ```sh
-npx degit Darryl-Mbae/dockerized-express-react project
+npx degit Darryl-Mbae/dockerized-express-react .
 ```
 
-### 2. Change Directory
-```sh
-cd project
-```
 
-### 3. Install Dependencies
+### 2. Install Dependencies in  each folder
+ (optional docker will handle that )
+ 
 For the frontend:
 ```sh
 cd client && npm install
@@ -76,31 +74,28 @@ Create `.env` files for both `server/` and `client/`.
 
 Example **server/.env**:
 ```sh
-PORT=5000
 DATABASE_URL=postgresql://user:password@localhost:5432/mydb
 REDIS_URL=redis://localhost:6379
 ```
 
 ### 5. Set Up Prisma
-Generate Prisma client:
+Initialize Prisma client:
 ```sh
-npx prisma generate
+npx prisma init
 ```
 Apply migrations to the database:
 ```sh
 npx prisma migrate dev
 ```
 
-### 6. Run the Project with Docker
+### 6. Run the Project with Docker 
+Proof read and  edit dockerfile to your liking
+
 Start everything using Docker Compose:
 ```sh
-docker-compose up --build
+sudo docker-compose up 
 ```
 
-Or to run in detached mode:
-```sh
-docker-compose up -d
-```
 
 ### 7. Access the Application
 - **Frontend**: `http://localhost:5173`
@@ -125,7 +120,7 @@ npm run dev
 ## Deployment Guide
 For production, build and run the containers with:
 ```sh
-docker-compose -f docker-compose.prod.yml up --build -d
+Your assignment 
 ```
 
 ## Security & Best Practices
