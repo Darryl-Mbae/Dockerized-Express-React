@@ -25,7 +25,7 @@ services:
     ports:
       - "5500:5500"         # Expose port 5500 for the backend API
     environment:
-      DATABASE_URL: postgresql://admin:admindarletz@db:5432/darletz?schema=public
+      DATABASE_URL:  ****** # Enter yor DB URL
       REDIS_URL: redis://redis:6379
 
     depends_on:
@@ -46,11 +46,11 @@ services:
   db:
     image: postgres:alpine  # Use the official PostgreSQL image
     environment:
-      POSTGRES_USER: admin    # Set PostgreSQL username
-      POSTGRES_PASSWORD: admindarletz  # Set PostgreSQL password
-      POSTGRES_DB: darletz   # Set PostgreSQL database name
+      POSTGRES_USER: username   # Set PostgreSQL username
+      POSTGRES_PASSWORD: password  # Set PostgreSQL password
+      POSTGRES_DB: your_db   # Set PostgreSQL database name
     volumes:
-      - darletz:/var/lib/postgresql/data  # Persist PostgreSQL data
+      - your_db:/var/lib/postgresql/data  # Persist PostgreSQL data
     ports:
       - "5432:5432"          # Expose PostgreSQL port
 
@@ -63,5 +63,5 @@ services:
 
 # Volumes (for persistent storage)
 volumes:
-  darletz:
+  your_db:
 
